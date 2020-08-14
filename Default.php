@@ -18,8 +18,10 @@ include("auth_session.php");
 		if (empty($_POST['task'])) {
 			$errors = "You must fill in the task";
 		}else{
+         $tid=$_POST['tid'];
 			$task = $_POST['task'];
-			$query = "INSERT INTO tasks (task) VALUES ('$task')";
+            $useid= $_POST['useid'];
+			$query = " INSERT INTO `tasks` (`tid`, `task`, `useid`)VALUES ('$tid','$task' ,'$useid')";
 			mysqli_query($con, $query);
 			header('location: Default.php');
 		}
@@ -154,7 +156,7 @@ tr:hover {
 		</thead>
 
 		<tbody>
-			<?php $i = 1; while ($row = mysqli_fetch_array($tasks)) { ?>
+			<?php $i = 1; while ($row =mysqli_fetch_array($tasks)) { ?>
 				<tr>
 					<td> <?php echo $i; ?> </td>
 					<td class="task"> <?php echo $row['task']; ?> </td>
